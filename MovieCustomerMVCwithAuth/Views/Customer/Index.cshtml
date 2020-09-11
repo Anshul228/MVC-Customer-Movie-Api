@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MovieCustomerMVCwithAuth.Models.Customer>
+@*@model IEnumerable<MovieCustomerMVCwithAuth.Models.MemberShipType>*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-capitalize text-primary">Index</h2>
+@Html.ActionLink("++New CUSt", "new", "customer")
+@foreach (var item in Model)
+{
+    @*<p class="text-warning">@item.Name  @item.Id   </p>
+        <p class="text-primary"> @item.MemberShipType.DiscountRate</p>*@
+    <div class="pd">
+        <p>@Html.ActionLink(item.Name, "Details", "Customer", new { id = item.Id }, null)</p>
+        <button data-cust-id="@item.Id" class="btn btn-danger js-del">Delete </button>
+    </div>
+
+}
+@*@section scripts{
+    <script>
+        $(() => {
+            $('.js-del').on('click', () => {
+                let btn = $('.js-del')
+                if (confirm("Are u sure want to del this customer??")) {
+                    $.ajax({
+                        url: "/api/customer/" + $('.js-del').attr("data-cust-id"),
+                        method: "Delete",
+                        success: () => {
+
+                            console.log("Delete succ!!!!")
+                            btn.removeAttr()
+
+
+                        }
+                    })
+
+                }
+            })
+
+        })
+    </script>
+    }*@
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('.pd').on('click', '.js-del',function () {
+                let btn = $(this)
+                if (confirm("Are you sure you want to delete this customer?")) {
+                    $.ajax({
+                        url: '/api/customer/' + $(this).attr('data-cust-id'),
+                        method: 'DELETE',
+                        success: function () {
+                            //console.log("Delete Success....")
+                            btn.parent('div').remove()
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}
