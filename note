@@ -1,0 +1,7 @@
+this file contains 2 model ie customer and movies 
+each model is linked with another model ie customer is linked with membership and movie is linked with genre
+customer will register him self and add membership type accoding to himself then after successful creation he can edit it update it delete it
+same for movie !!!
+previously it was done with the help of dbcontext obj 
+bt now it is done with API
+working of
